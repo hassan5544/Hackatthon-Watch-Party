@@ -16,7 +16,7 @@ namespace Hackatthon_Watch_Party.ContextFactory
             var builder = new DbContextOptionsBuilder<RepositoryContext>()
 
           .UseSqlServer(configuration.GetConnectionString("sqlConnection"),
-b => b.MigrationsAssembly("Hurryapp"));
+b => b.MigrationsAssembly("Hackatthon-Watch-Party"));
 
             return new RepositoryContext(builder.Options);
         }
