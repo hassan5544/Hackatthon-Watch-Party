@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ namespace Service
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IVideoService> _videoService;
 
-        public ServiceManager(IRepositoryManager repositoryManager , ILoggerManager loggerManager)
+        public ServiceManager(IRepositoryManager repositoryManager , ILoggerManager loggerManager , IMapper mapper)
         {
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager , loggerManager));
-            _videoService = new Lazy<IVideoService>(() => new VideoService(repositoryManager , loggerManager));
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager , loggerManager , mapper));
+            _videoService = new Lazy<IVideoService>(() => new VideoService(repositoryManager , loggerManager , mapper));
         }
         public IUserService UserService => _userService.Value;
 

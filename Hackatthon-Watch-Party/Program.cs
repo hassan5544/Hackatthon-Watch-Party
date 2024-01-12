@@ -10,13 +10,15 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
+
+builder.Services.ConfigureServiceManager();
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 builder.Services.AddControllers()
 .AddApplicationPart(typeof(WatchPartyPresentation.AssemblyReference).Assembly);
-
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
