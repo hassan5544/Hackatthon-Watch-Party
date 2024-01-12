@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompanyEmployees.Presentation
+namespace Hackatthon_Watch.Presentation
 {
-    internal class AssemblyReference
+    public class AssemblyReference
     {
+
     }
 }
