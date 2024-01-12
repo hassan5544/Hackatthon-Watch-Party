@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace Hackatthon_Watch_Party.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240112134349_WatchPartyEntity")]
+    partial class WatchPartyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,6 @@ namespace Hackatthon_Watch_Party.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            id = new Guid("b00b90ca-33df-422f-b010-1996b895631f"),
-                            Email = "test",
-                            Name = "test",
-                            PassWord = "test"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Video", b =>

@@ -24,5 +24,6 @@ namespace Repository
         }
         public DbSet<User>? Users { get; set; }
         public DbSet<Video>? Videos { get; set; }
+        public DbSet<WatchParty>? WatchParties { get; set; }
     }
 }

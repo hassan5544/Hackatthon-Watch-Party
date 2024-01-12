@@ -20,6 +20,7 @@ namespace Entities.Models
         public string Url { get; set; }
         [Required(ErrorMessage = "User is a required field.")]
       
+        public string Thumbnailurl { get; set; }
         public User UploadedBy { get; set; }
     }
 }
