@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    internal class WatchParty
+    public class WatchParty
     {
-        
-
+        public Guid id { get; set; }
+        public string MovieTitle { get; set; }
+        public Video Video { get; set; }
     }
 }
