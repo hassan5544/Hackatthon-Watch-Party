@@ -16,9 +16,10 @@ namespace Service
         public ServiceManager(IRepositoryManager repositoryManager , ILoggerManager loggerManager)
         {
             _userService = new Lazy<IUserService>(() => new UserService(repositoryManager , loggerManager));
+            _videoService = new Lazy<IVideoService>(() => new VideoService(repositoryManager , loggerManager));
         }
         public IUserService UserService => _userService.Value;
 
-        public IVideoService VideoService => throw new NotImplementedException();
+        public IVideoService VideoService => _videoService.Value;
     }
 }
