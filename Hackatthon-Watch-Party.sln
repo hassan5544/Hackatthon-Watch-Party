@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackatthon-Watch-Party", "H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{366ADACB-0123-460D-A1EF-EEF25FF84B82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{CDA14927-3162-42CF-AF3A-5E8F2AB12CF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{366ADACB-0123-460D-A1EF-EEF25FF84B82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366ADACB-0123-460D-A1EF-EEF25FF84B82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366ADACB-0123-460D-A1EF-EEF25FF84B82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDA14927-3162-42CF-AF3A-5E8F2AB12CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDA14927-3162-42CF-AF3A-5E8F2AB12CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDA14927-3162-42CF-AF3A-5E8F2AB12CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDA14927-3162-42CF-AF3A-5E8F2AB12CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
