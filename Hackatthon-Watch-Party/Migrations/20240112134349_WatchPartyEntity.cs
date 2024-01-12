@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Hackatthon_Watch_Party.Migrations
+namespace Hackatthon_Watch.Migrations
 {
     public partial class WatchPartyEntity : Migration
     {

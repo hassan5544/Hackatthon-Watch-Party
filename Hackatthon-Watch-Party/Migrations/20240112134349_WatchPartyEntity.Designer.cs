@@ -9,7 +9,7 @@ using Repository;
 
 #nullable disable
 
-namespace Hackatthon_Watch_Party.Migrations
+namespace Hackatthon_Watch.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
     [Migration("20240112134349_WatchPartyEntity")]
