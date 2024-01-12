@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{2DAB7669-A92A-4167-B1FD-86B412123EDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchPartyPresentation", "WatchPartyPresentation\WatchPartyPresentation.csproj", "{8A2884CE-4FE8-41E1-80AD-5E5C828E7AE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{2DAB7669-A92A-4167-B1FD-86B412123EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DAB7669-A92A-4167-B1FD-86B412123EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DAB7669-A92A-4167-B1FD-86B412123EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2884CE-4FE8-41E1-80AD-5E5C828E7AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2884CE-4FE8-41E1-80AD-5E5C828E7AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2884CE-4FE8-41E1-80AD-5E5C828E7AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2884CE-4FE8-41E1-80AD-5E5C828E7AE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

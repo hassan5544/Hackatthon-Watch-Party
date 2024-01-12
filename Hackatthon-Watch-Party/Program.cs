@@ -1,6 +1,5 @@
 using Hackatthon_Watch_Party.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
-using Ha
 using NLog;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +13,10 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 builder.Services.AddControllers()
-.AddApplicationPart(typeof(Hackatthon_Watch.Presentation.AssemblyReference).Ass
-embly);
+.AddApplicationPart(typeof(WatchPartyPresentation.AssemblyReference).Assembly);
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
