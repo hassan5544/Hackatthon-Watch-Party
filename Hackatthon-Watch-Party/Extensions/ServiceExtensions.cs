@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using LoggerService;
+using Repository;
 
 namespace Hackatthon_Watch_Party.Extensions
 {
@@ -22,6 +23,9 @@ namespace Hackatthon_Watch_Party.Extensions
 
         public static void ConfigureLoggerService(this IServiceCollection services) =>
             services.AddSingleton<ILoggerManager, LoggerManager>();
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
 
     }
 }
