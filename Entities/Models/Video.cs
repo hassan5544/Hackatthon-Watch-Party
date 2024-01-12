@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    internal class Video
+    public class Video
     {
         public Guid id { get; set; }
         [Required(ErrorMessage = "Video Title is a required field.")]
