@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities.Models;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 using System;
@@ -31,8 +32,23 @@ namespace WatchPartyPresentation.Controllers
             return StatusCode(201);
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        {
+            if (!await _service.AuthenticationService.ValidateUser(user))
+                return Unauthorized();
+            return Ok(new
+            {
+                Token = await _service
+            .AuthenticationService.CreateToken()
+            });
+        }
+
     }
-}
 
    
+
+}
+
+
 
