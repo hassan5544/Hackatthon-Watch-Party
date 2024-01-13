@@ -39,5 +39,13 @@ namespace Service
             }
         }
 
+        public UserDto GetUserByNameAndPassword(string userName , string password , bool trakChanges)
+        {
+            var users = _repository.User.GetUserByNameAndPassword(userName, password, trakChanges);
+
+            var userDto = _mapper.Map<UserDto>(users);
+            return userDto;
+        }
+
     }
 }

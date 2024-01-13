@@ -20,5 +20,8 @@ namespace Repository
                 FindAll(trackChanges)
                 .OrderBy(c => c.Name)
                 .ToList();
+
+        public User GetUserByNameAndPassword(string UserName, string Password , bool trackChanges) =>
+            FindByCondition(c => c.Name.Equals(UserName) && c.PassWord.Equals(Password) , trackChanges).SingleOrDefault();
     }
 }

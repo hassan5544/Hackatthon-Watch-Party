@@ -8,7 +8,8 @@ namespace Hackatthon_Watch_Party
     {
         public MappingProfile() 
         {
-           
+            CreateMap<UserForRegistrationDto, User>();
+
         }
     }
 }

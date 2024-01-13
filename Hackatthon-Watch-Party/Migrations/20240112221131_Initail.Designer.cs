@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace Hackatthon_Watch_Party.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240112221131_Initail")]
+    partial class Initail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,15 +105,6 @@ namespace Hackatthon_Watch_Party.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "963e03cf-a915-4c8d-bea6-01043d5f9bb2",
-                            ConcurrencyStamp = "275a79cb-491b-4ffe-8605-b4f5790e3f0f",
-                            Name = "User",
-                            NormalizedName = "User"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -306,6 +299,22 @@ namespace Hackatthon_Watch_Party.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.HasDiscriminator().HasValue("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1360fbbe-f048-4638-837c-ef08cede3af0",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "36ce9e91-d49e-49f6-843c-1d0e2b711683",
+                            Email = "test",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2ec3361c-3d63-4982-b4b9-bbe13dd3e2e6",
+                            TwoFactorEnabled = false,
+                            Name = "test",
+                            PassWord = "test"
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Video", b =>

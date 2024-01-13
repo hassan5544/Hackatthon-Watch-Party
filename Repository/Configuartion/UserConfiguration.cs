@@ -16,7 +16,6 @@ namespace Repository.Configuartion
             builder.HasData(
                 new User
                 {
-                    id = Guid.NewGuid(), 
                     Name = "test",
                     PassWord = "test",
                     Email = "test",

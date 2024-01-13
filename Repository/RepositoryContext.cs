@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Repository.Configuartion;
 using System;
@@ -11,7 +12,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace Repository
 {
    
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext
     {
         public RepositoryContext(DbContextOptions options)
         : base(options)
@@ -20,7 +21,10 @@ namespace Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
         }
         public DbSet<User>? Users { get; set; }
         public DbSet<Video>? Videos { get; set; }

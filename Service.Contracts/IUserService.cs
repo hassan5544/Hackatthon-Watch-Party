@@ -10,6 +10,7 @@ namespace Service.Contracts
     public interface IUserService
     {
         IEnumerable<UserDto> GetAllUsers(bool trackChanges);
+        UserDto GetUserByNameAndPassword(string userName, string password, bool trackChanges);
 
     }
 }

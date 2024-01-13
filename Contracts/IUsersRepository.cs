@@ -11,5 +11,6 @@ namespace Contracts
     {
         IEnumerable<User> GetAllUsers(bool trackChanges);
 
+        User GetUserByNameAndPassword(string UserName, string Password , bool trackChanges);
     }
 }

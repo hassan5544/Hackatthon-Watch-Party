@@ -23,6 +23,10 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
+
+
 var app = builder.Build();
 
 
