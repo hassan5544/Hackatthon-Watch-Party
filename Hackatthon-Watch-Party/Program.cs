@@ -1,4 +1,5 @@
 using Hackatthon_Watch_Party.Extensions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 var builder = WebApplication.CreateBuilder(args);
@@ -54,5 +55,6 @@ app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
