@@ -12,8 +12,8 @@ using Repository;
 namespace Hackatthon_Watch_Party.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240112221131_Initail")]
-    partial class Initail
+    [Migration("20240113081136_Initials")]
+    partial class Initials
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -105,6 +105,15 @@ namespace Hackatthon_Watch_Party.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1fee9b6a-c37a-46f0-b269-f9ca564d9069",
+                            ConcurrencyStamp = "b44880b3-99fd-4cbc-8597-1f56b0a7956e",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -299,22 +308,6 @@ namespace Hackatthon_Watch_Party.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.HasDiscriminator().HasValue("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1360fbbe-f048-4638-837c-ef08cede3af0",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "36ce9e91-d49e-49f6-843c-1d0e2b711683",
-                            Email = "test",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "2ec3361c-3d63-4982-b4b9-bbe13dd3e2e6",
-                            TwoFactorEnabled = false,
-                            Name = "test",
-                            PassWord = "test"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Video", b =>

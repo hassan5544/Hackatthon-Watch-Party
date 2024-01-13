@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hackatthon_Watch_Party.Migrations
 {
-    public partial class Initail : Migration
+    public partial class Initials : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -200,9 +200,9 @@ namespace Hackatthon_Watch_Party.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PassWord", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1360fbbe-f048-4638-837c-ef08cede3af0", 0, "36ce9e91-d49e-49f6-843c-1d0e2b711683", "User", "test", false, false, null, "test", null, null, "test", null, null, false, "2ec3361c-3d63-4982-b4b9-bbe13dd3e2e6", false, null });
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "1fee9b6a-c37a-46f0-b269-f9ca564d9069", "b44880b3-99fd-4cbc-8597-1f56b0a7956e", "User", "User" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
