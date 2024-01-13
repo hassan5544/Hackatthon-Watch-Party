@@ -14,8 +14,8 @@
             <!-- Video Player -->
             <div class="col-md-8">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <video controls>
-                        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    <video controls id="myVideo">
+                        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" id="myVideo">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -35,11 +35,15 @@
         <div class="row">
             <input type="text" id="chat-input" placeholder="Type a message..." style="width: 50%; margin-top: 10px;">
             <button id="send-button" style="width: 100%; margin-top: 10px;">Send</button>
+            <button id="Forward10" style="width: 100%; margin-top: 10px;">Forward 10</button>
+            <button id="Rewind10" style="width: 100%; margin-top: 10px;">Rewind 10</button>
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+
             <div class="col-md-12">
                 <h2>Attendance List</h2>
                 <ul class="list-group" id="attendanceList">
-                    <li class="list-group-item">Attendee 1</li>
-                    <li class="list-group-item">Attendee 2</li>
+                   
                 </ul>
             </div>
         </div>
@@ -60,74 +64,122 @@
 
     <script>
         var connection = new signalR.HubConnectionBuilder().withUrl("/PartyHub").build();
+        var playButton = document.getElementById('playButton');
+        var pauseButton = document.getElementById('pauseButton');
         document.getElementById("send-button").disabled = true;
-        var Email = sessionStorage.getItem('UserEmail').toString();)
+        var Email = sessionStorage.getItem('UserEmail').toString(); // Removed extra closing parenthesis here
+
         $(document).ready(function () {
-        
+
             function toggleChatVisibility() {
                 var chatBox = $('#chat-box');
-              
+
                 if (chatBox.children().length > 0) {
                     chatBox.show();
                 } else {
                     chatBox.hide();
                 }
             }
+
             connection.start().then(function () {
                 document.getElementById("send-button").disabled = false;
+                connection.invoke("NotifyEnter", Email)
+                    .then(function () {
+                        console.log("Notified page enter successfully");
+                    })
+                    .catch(function (err) {
+                        console.error("Error notifying page enter:", err.toString());
+                    });
             }).catch(function (err) {
                 return console.error(err.toString());
             });
-            connection.on("ReceiveMessage", function (user, message) {
-               addMessage(user + ": " + message);
+            var video = document.getElementById('myVideo');
+
+            connection.on("Played", function () {
+                video.play();
+                console.log("play");
             });
-           
+
+            connection.on("Paused", function () {
+                video.pause();
+                console.log("pause");
+            });
+
+            connection.on("Forwarded10", function () {
+                video.currentTime += 10;
+                console.log("for10");
+            });
+
+            connection.on("Rewinded10", function () {
+                video.currentTime -= 10;
+                console.log("rewind 10");
+            });
+
+            connection.on("ReceiveMessage", function (user, message) {
+                addMessage(user + ": " + message);
+            });
+            document.getElementById('Forward10').addEventListener('click', function () {
+                connection.invoke('Forward10').catch(function (err) {
+                    return console.error(err.toString());
+                });
+            });
+
+            document.getElementById('Rewind10').addEventListener('click', function () {
+                connection.invoke('Rewind10').catch(function (err) {
+                    return console.error(err.toString());
+                });
+            });
+
             function addMessage(message) {
                 var chatBox = $('#chat-box');
                 chatBox.append('<p>' + message + '</p>');
                 toggleChatVisibility();
             }
+
             document.getElementById("send-button").addEventListener("click", function (event) {
                 event.preventDefault();
-            });
-            
-           
-            $('#send-button').click(function () {
-                var user = "Hassan";
+                var user = Email;
                 var message = document.getElementById("chat-input").value;
+
                 connection.invoke("SendMessage", user, message).catch(function (err) {
                     return console.error(err.toString());
                 });
-               
+
                 var chatBox = $('#chat-box');
                 if (message.trim() !== '') {
-                   
                     $('#chat-input').val('');
+
+                    
                     setTimeout(function () {
-                        chatBox.hide();
+                        chatBox.hide(); 
                     }, 3000);
                 }
             });
-            connection.on("UserEntered", function (Email) {
-                // Create a new list item
+            playButton.addEventListener('click', function () {
+                video.play();
+                connection.invoke('Play').catch(function (err) {
+                    return console.error(err.toString());
+                });
+            });
+
+            pauseButton.addEventListener('click', function () {
+                video.pause();
+                connection.invoke('Pause').catch(function (err) {
+                    return console.error(err.toString());
+                });
+            });
+            connection.on("UserEntered", function (email) { 
                 var li = document.createElement("li");
-                li.textContent = Email;
+                li.textContent = email;
                 li.className = "list-group-item";
 
-                // Add the list item to the attendance list
                 var attendanceList = document.querySelector(".list-group");
                 attendanceList.appendChild(li);
             });
 
-            connection.invoke("NotifyEnter", Email)
-                .then(function () {
-                    console.log("Notified page enter successfully");
-                })
-                .catch(function (err) {
-                    console.error("Error notifying page enter:", err.toString());
-                });
+            
+
             window.onbeforeunload = function () {
-               
                 connection.invoke("NotifyLeave", Email)
                     .then(function () {
                         console.log("Notified page leave successfully");
@@ -135,8 +187,10 @@
                     .catch(function (err) {
                         console.error("Error notifying page leave:", err.toString());
                     });
+            };
         });
     </script>
+
 
 </body>
 </html>

@@ -12,10 +12,9 @@ namespace Hurry_app_Website.Controllers
         {
             return View();
         }
-       public IActionResult GoToHome()
+        public IActionResult JoinParty()
         {
-           return RedirectToAction("Index", "Home");
+            return RedirectToAction("Party");
         }
-       
     }
 }
