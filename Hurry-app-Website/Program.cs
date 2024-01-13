@@ -1,3 +1,4 @@
+using Hurry_app_Website.Hubs.SignalRChat.Hubs;
 namespace Hurry_app_Website
 {
     public class Program
@@ -8,7 +9,7 @@ namespace Hurry_app_Website
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddSignalR();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,7 +26,7 @@ namespace Hurry_app_Website
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapHub<PartyHub>("/PartyHub");
             app.MapControllerRoute(
      name: "default",
      pattern: "{controller=Account}/{action=Login}/{id?}");

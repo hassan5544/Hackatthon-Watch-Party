@@ -1,31 +1,142 @@
-﻿<div class="container">
-    <div class="row">
-        <!-- Video Player -->
-        <div class="col-md-4">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="your-video-url" ></iframe>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Chat</title>
+    <!-- Add jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <!-- Video Player -->
+            <div class="col-md-8">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls>
+                        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <!-- Chat Section -->
+            <div class="col-md-4">
+              
+                <div id="chat-box" style="border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: scroll; display: none;">
+                   
+                </div>
+               
             </div>
         </div>
 
-        <!-- Attendance List -->
-        <div class="col-md-4">
-            <h2>Attendance List</h2>
-            <ul class="list-group">
-               
-                <li class="list-group-item">Attendee 1</li>
-                <li class="list-group-item">Attendee 2</li>
-             
-            </ul>
-        </div>
-
-        <!-- Chat Section -->
-        <div class="col-md-4">
-            <h2>Chat</h2>
-            <div id="chat-box">
-               
+        <!-- Attendance List Row -->
+        <div class="row">
+            <input type="text" id="chat-input" placeholder="Type a message..." style="width: 50%; margin-top: 10px;">
+            <button id="send-button" style="width: 100%; margin-top: 10px;">Send</button>
+            <div class="col-md-12">
+                <h2>Attendance List</h2>
+                <ul class="list-group" id="attendanceList">
+                    <li class="list-group-item">Attendee 1</li>
+                    <li class="list-group-item">Attendee 2</li>
+                </ul>
             </div>
-            <input type="text" id="chat-input" placeholder="Type a message...">
-            <button id="send-button">Send</button>
         </div>
     </div>
-</div>
+    @* <div class="row p-1">
+        <div class="col-6">
+            <hr />
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+    </div> *@
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/PartyHub").build();
+        document.getElementById("send-button").disabled = true;
+        var Email = sessionStorage.getItem('UserEmail').toString();)
+        $(document).ready(function () {
+        
+            function toggleChatVisibility() {
+                var chatBox = $('#chat-box');
+              
+                if (chatBox.children().length > 0) {
+                    chatBox.show();
+                } else {
+                    chatBox.hide();
+                }
+            }
+            connection.start().then(function () {
+                document.getElementById("send-button").disabled = false;
+            }).catch(function (err) {
+                return console.error(err.toString());
+            });
+            connection.on("ReceiveMessage", function (user, message) {
+               addMessage(user + ": " + message);
+            });
+           
+            function addMessage(message) {
+                var chatBox = $('#chat-box');
+                chatBox.append('<p>' + message + '</p>');
+                toggleChatVisibility();
+            }
+            document.getElementById("send-button").addEventListener("click", function (event) {
+                event.preventDefault();
+            });
+            
+           
+            $('#send-button').click(function () {
+                var user = "Hassan";
+                var message = document.getElementById("chat-input").value;
+                connection.invoke("SendMessage", user, message).catch(function (err) {
+                    return console.error(err.toString());
+                });
+               
+                var chatBox = $('#chat-box');
+                if (message.trim() !== '') {
+                   
+                    $('#chat-input').val('');
+                    setTimeout(function () {
+                        chatBox.hide();
+                    }, 3000);
+                }
+            });
+            connection.on("UserEntered", function (Email) {
+                // Create a new list item
+                var li = document.createElement("li");
+                li.textContent = Email;
+                li.className = "list-group-item";
+
+                // Add the list item to the attendance list
+                var attendanceList = document.querySelector(".list-group");
+                attendanceList.appendChild(li);
+            });
+
+            connection.invoke("NotifyEnter", Email)
+                .then(function () {
+                    console.log("Notified page enter successfully");
+                })
+                .catch(function (err) {
+                    console.error("Error notifying page enter:", err.toString());
+                });
+            window.onbeforeunload = function () {
+               
+                connection.invoke("NotifyLeave", Email)
+                    .then(function () {
+                        console.log("Notified page leave successfully");
+                    })
+                    .catch(function (err) {
+                        console.error("Error notifying page leave:", err.toString());
+                    });
+        });
+    </script>
+
+</body>
+</html>
