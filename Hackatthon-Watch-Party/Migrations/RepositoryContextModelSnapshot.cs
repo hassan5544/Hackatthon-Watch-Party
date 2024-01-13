@@ -107,8 +107,8 @@ namespace Hackatthon_Watch_Party.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "963e03cf-a915-4c8d-bea6-01043d5f9bb2",
-                            ConcurrencyStamp = "275a79cb-491b-4ffe-8605-b4f5790e3f0f",
+                            Id = "1fee9b6a-c37a-46f0-b269-f9ca564d9069",
+                            ConcurrencyStamp = "b44880b3-99fd-4cbc-8597-1f56b0a7956e",
                             Name = "User",
                             NormalizedName = "User"
                         });

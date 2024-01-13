@@ -21,16 +21,29 @@ namespace WatchPartyPresentation.Controllers
         {
             try
             {
-                var companies =
+                var Users =
                 _service.UserService.GetAllUsers(trackChanges: false);
-                return Ok(companies);
+                return Ok(Users);
             }
             catch
             {
                 return StatusCode(500, "Internal server error");
             }
         }
-
+        //[HttpPost]
+        //public IActionResult AddUser()
+        //{
+        //    try
+        //    {
+        //        var User =
+        //        _service.UserService.GetAllUsers(trackChanges: false);
+        //        return Ok(Users);
+        //    }
+        //    catch
+        //    {
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
 
     }
 }
